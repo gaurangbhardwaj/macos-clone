@@ -165,7 +165,7 @@ const DockController = () => {
               {idx === ICONS_DATA.length - 1 && <Divider />}
               <IconWrapper key={idx}>
                 <Icon {...props} />
-                <OpenedAppDot isOpened={id === openedApp} />
+                <OpenedAppDot isOpened={id === openedApp || id === "finder"} />
               </IconWrapper>
             </>
           );
