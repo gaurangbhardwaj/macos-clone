@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import BigSurBackgroundImage from "images/big-sur-wallpaper.jpg";
 import DockController from "./dock";
+import MenuBarController from "./menu-bar";
 
 const MainContainer = styled.div`
   display: flex;
@@ -23,9 +24,19 @@ const DockContainer = styled.div`
   justify-content: center;
 `;
 
+const MenuBarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-start;
+`;
+
 const MainScreenController = () => {
   return (
     <MainContainer>
+      <MenuBarContainer>
+        <MenuBarController />
+      </MenuBarContainer>
       <DockContainer>
         <DockController />
       </DockContainer>
