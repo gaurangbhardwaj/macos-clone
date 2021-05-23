@@ -48,7 +48,7 @@ const SystemOptions = styled.div`
 
 const MenuBarController = () => {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
-  useEffect(() => setCurrentDateTime(new Date()), [new Date()]);
+  setInterval(() => setCurrentDateTime(new Date()), 1000);
   return (
     <Container>
       <AppOptions>

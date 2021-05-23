@@ -35,10 +35,41 @@ const Container = styled.div`
   transition: 100ms;
 `;
 
+const MagnifyCssOnePointFive = css`
+  transform-origin: center bottom;
+  transform: scale(1.5);
+  margin: 0 14px;
+`;
+
+const MagnifyCssOnePointTwo = css`
+  transform-origin: center bottom;
+  transform: scale(1.2);
+  margin: 0 4px;
+`;
+
 const IconsContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  ${({magnificationIds}) =>
+    (magnificationIds?.previousId ||
+      magnificationIds?.previousToPreviousId ||
+      magnificationIds?.nextId ||
+      magnificationIds?.nextToNextId) &&
+    css`
+      #${magnificationIds.previousId} {
+        ${MagnifyCssOnePointFive}
+      }
+      #${magnificationIds.nextId} {
+        ${MagnifyCssOnePointFive}
+      }
+      #${magnificationIds.previousToPreviousId} {
+        ${MagnifyCssOnePointTwo}
+      }
+      #${magnificationIds.nextToNextId} {
+        ${MagnifyCssOnePointTwo}
+      }
+    `}
   ${({openingApp}) =>
     openingApp &&
     css`
@@ -54,24 +85,6 @@ const IconsContainer = styled.div`
             transform: translate3d(0, -15px, 0);
           }
         }
-      }
-    `}
-  ${({magnificationIds}) =>
-    (magnificationIds?.previousId ||
-      magnificationIds?.previousToPreviousId ||
-      magnificationIds?.nextId ||
-      magnificationIds?.nextToNextId) &&
-    css`
-      #${magnificationIds?.previousId}, #${magnificationIds?.nextId} {
-        transform-origin: center bottom;
-        transform: scale(1.5);
-        margin: 0 14px;
-      }
-      #${magnificationIds?.previousToPreviousId},
-        #${magnificationIds?.nextToNextId} {
-        transform-origin: center bottom;
-        transform: scale(1.2);
-        margin: 0 4px;
       }
     `}
 `;
@@ -137,27 +150,20 @@ const DockController = () => {
         {ICONS_DATA.map(({id, src, title}, idx) => {
           const name = {};
           const props = {
-            key: id,
             id: id,
             src: src,
             alt: id,
             title: title,
           };
-          if (idx > 0) {
-            name.previousId = ICONS_DATA[idx - 1].id;
-            if (idx > 1) name.previousToPreviousId = ICONS_DATA[idx - 2].id;
-          }
-          if (idx < ICONS_DATA.length - 1) {
-            name.nextId = ICONS_DATA[idx + 1].id;
-            if (idx < ICONS_DATA.length - 2)
-              name.nextToNextId = ICONS_DATA[idx + 2].id;
-          }
-          if (name && Object.keys(name).length)
-            props.name = JSON.stringify(name);
+          name.previousId = ICONS_DATA[idx - 1]?.id || "n/a";
+          name.previousToPreviousId = ICONS_DATA[idx - 2]?.id || "n/a";
+          name.nextId = ICONS_DATA[idx + 1]?.id || "n/a";
+          name.nextToNextId = ICONS_DATA[idx + 2]?.id || "n/a";
+          props.name = JSON.stringify(name);
           return (
             <>
               {idx === ICONS_DATA.length - 1 && <Divider />}
-              <IconWrapper>
+              <IconWrapper key={idx}>
                 <Icon {...props} />
                 <OpenedAppDot isOpened={id === openedApp} />
               </IconWrapper>
