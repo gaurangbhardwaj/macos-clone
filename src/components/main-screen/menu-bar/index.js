@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -47,8 +47,11 @@ const SystemOptions = styled.div`
 `;
 
 const MenuBarController = () => {
-  const [currentDateTime, setCurrentDateTime] = useState(new Date());
-  setInterval(() => setCurrentDateTime(new Date()), 1000);
+  setInterval(() => {
+    document.getElementById("live-clock").innerHTML = moment().format(
+      "ddd DD MMM HH:mm:ss"
+    );
+  }, 1000);
   return (
     <Container>
       <AppOptions>
@@ -63,9 +66,7 @@ const MenuBarController = () => {
       </AppOptions>
       <SystemOptions>
         <Option>Gaurang Bhardwaj</Option>
-        <Option style={{width: 140}}>{`${moment(currentDateTime).format(
-          "ddd DD MMM HH:mm:ss"
-        )}`}</Option>
+        <Option id="live-clock" style={{width: 140}}></Option>
       </SystemOptions>
     </Container>
   );
