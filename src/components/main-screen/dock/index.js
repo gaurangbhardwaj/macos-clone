@@ -76,7 +76,7 @@ const IconsContainer = styled.div`
       #${openingApp} {
         animation: bounce 0.4s;
         animation-direction: alternate;
-        animation-iteration-count: 6;
+        animation-iteration-count: infinite;
         @keyframes bounce {
           from {
             transform: translate3d(0, 0, 0);

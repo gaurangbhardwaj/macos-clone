@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import BigSurBackgroundImage from "images/big-sur-wallpaper.jpg";
-import DockController from "./dock";
 import MenuBarController from "./menu-bar";
+import DesktopController from "./desktop";
+import DockController from "./dock";
 
 const MainContainer = styled.div`
   display: flex;
@@ -15,6 +16,21 @@ const MainContainer = styled.div`
   background-size: cover;
 `;
 
+const MenuBarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-start;
+`;
+
+const DesktopContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin: 20px;
+`;
+
 const DockContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -24,19 +40,15 @@ const DockContainer = styled.div`
   justify-content: center;
 `;
 
-const MenuBarContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: flex-start;
-`;
-
 const MainScreenController = () => {
   return (
     <MainContainer>
       <MenuBarContainer>
         <MenuBarController />
       </MenuBarContainer>
+      <DesktopContainer>
+        <DesktopController />
+      </DesktopContainer>
       <DockContainer>
         <DockController />
       </DockContainer>
