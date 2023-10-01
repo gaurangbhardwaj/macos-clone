@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import styled, {css} from "styled-components";
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 import FinderIcon from "images/finder.png";
 import FirefoxIcon from "images/firefox.png";
 import ChromeIcon from "images/chrome.png";
@@ -11,28 +11,26 @@ import SystemPreferencesIcon from "images/system-preferences.png";
 import BinIcon from "images/bin.png";
 
 const ICONS_DATA = [
-  {id: "finder", title: "Finder", src: FinderIcon},
-  {id: "firefox", title: "Firefox", src: FirefoxIcon},
-  {id: "chrome", title: "Chrome", src: ChromeIcon},
-  {id: "terminal", title: "Terminal", src: TerminalIcon},
-  {id: "mail", title: "Mail", src: MailIcon},
-  {id: "books", title: "Books", src: BooksIcon},
-  {id: "app-store", title: "App Store", src: AppStoreIcon},
+  { id: "finder", title: "Finder", src: FinderIcon },
+  { id: "firefox", title: "Firefox", src: FirefoxIcon },
+  { id: "chrome", title: "Chrome", src: ChromeIcon },
+  { id: "terminal", title: "Terminal", src: TerminalIcon },
+  { id: "mail", title: "Mail", src: MailIcon },
+  { id: "books", title: "Books", src: BooksIcon },
+  { id: "app-store", title: "App Store", src: AppStoreIcon },
   {
     id: "system-prefrences",
     title: "System Preferences",
     src: SystemPreferencesIcon,
   },
-  {id: "bin", title: "Bin", src: BinIcon},
+  { id: "bin", title: "Bin", src: BinIcon },
 ];
 
 const Container = styled.div`
   margin-bottom: 8px;
-  padding-bottom: 10px;
   height: 50px;
   border-radius: 15px;
   background-color: rgb(0, 0, 0, 0.3);
-  transition: 100ms;
 `;
 
 const MagnifyCssOnePointFive = css`
@@ -51,7 +49,12 @@ const IconsContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${({magnificationIds}) =>
+  justify-content: center;
+  padding: 4px;
+  &:hover {
+    width: 500px;
+  }
+  ${({ magnificationIds }) =>
     (magnificationIds?.previousId ||
       magnificationIds?.previousToPreviousId ||
       magnificationIds?.nextId ||
@@ -70,7 +73,7 @@ const IconsContainer = styled.div`
         ${MagnifyCssOnePointTwo}
       }
     `}
-  ${({openingApp}) =>
+  ${({ openingApp }) =>
     openingApp &&
     css`
       #${openingApp} {
@@ -102,21 +105,21 @@ const IconWrapper = styled.div`
 `;
 
 const Icon = styled.img`
-  height: 55px;
-  width: 55px;
+  height: 40px;
+  width: 40px;
   gap: 5px;
-  transition: 200ms;
+  transition: 100ms;
 `;
 
 const OpenedAppDot = styled.div`
-  visibility: ${({isOpened}) => (isOpened ? "visible" : "hidden")};
+  visibility: ${({ isOpened }) => (isOpened ? "visible" : "hidden")};
   padding: 2px;
   background-color: rgb(250, 250, 250, 0.6);
   border-radius: 50%;
 `;
 
 const Divider = styled.div`
-  height: 45px;
+  height: 42px;
   border-right: 1px solid rgb(250, 250, 250, 0.5);
   margin: auto 10px;
 `;
@@ -129,9 +132,9 @@ const DockController = () => {
       <IconsContainer
         id="icons-container"
         magnificationIds={magnificationIds}
-        onMouseOver={({target}) => {
+        onMouseOver={({ target }) => {
           if (!target?.name) return;
-          const {previousId, previousToPreviousId, nextId, nextToNextId} =
+          const { previousId, previousToPreviousId, nextId, nextToNextId } =
             JSON.parse(target.name);
           setMagnificationIds({
             previousId,
@@ -142,12 +145,13 @@ const DockController = () => {
         }}
         onMouseLeave={() => setMagnificationIds("")}
         openingApp={openedApp}
-        onClick={({target}) => {
+        onClick={({ target }) => {
           if (!target?.id) return;
           setOpenedApp(target.id);
+          setTimeout(() => setOpenedApp(""), 3000);
         }}
       >
-        {ICONS_DATA.map(({id, src, title}, idx) => {
+        {ICONS_DATA.map(({ id, src, title }, idx) => {
           const name = {};
           const props = {
             id: id,

@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Folder = styled.img`
   height: 70px;
-  width: 80px;
+  width: 70px;
   padding: 4px 2px;
   border-radius: 6px;
   border: 1px solid rgb(0, 0, 0, 0);
@@ -21,7 +21,7 @@ const FolderText = styled.div`
   color: white;
   font-size: 12px;
   font-weight: 800;
-  padding: 4px 6px;
+  padding: 2px 6px;
   border-radius: 6px;
 `;
 

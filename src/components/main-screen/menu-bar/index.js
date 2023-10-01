@@ -9,7 +9,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   background-color: rgb(0, 0, 0, 0.6);
-  padding: 0 10px;
+  padding-left: 10px;
 `;
 
 const AppOptions = styled.div`
