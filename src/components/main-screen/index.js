@@ -61,20 +61,21 @@ const MainScreenController = () => {
   useEffect(() => {
     setTimeout(async () => {
       const video = document.getElementById("bg-video");
-      const videoSpeeds = [1, 0.75, 0.5];
+      // const videoSpeeds = [1, 0.75, 0.5];
       try {
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 15; i++) {
           setTimeout(() => {
             if (video?.playbackRate) {
-              video.playbackRate = videoSpeeds[i];
+              video.playbackRate = 1 - Number((i / 30).toFixed(2));
+              console.log("video.playbackRate", video.playbackRate);
             }
           }, i * 500);
         }
-        setTimeout(() => video?.pause(), 2500);
+        setTimeout(() => video?.pause(), 9000);
       } catch (err) {
         console.log("UNABLE TO SET BG VIDEO");
       }
-    }, 10000);
+    }, 2000);
   }, []);
 
   return (
